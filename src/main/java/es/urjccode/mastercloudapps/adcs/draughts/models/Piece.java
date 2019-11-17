@@ -22,15 +22,6 @@ public class Piece {
 		if (!this.isAdvanced(origin, target)) {
 			return Error.NOT_ADVANCED;
 		}
-		int distance = origin.diagonalDistance(target);
-		if (distance > Piece.MAX_DISTANCE) {
-			return Error.BAD_DISTANCE;
-		}
-		if (distance == Piece.MAX_DISTANCE) {
-			if (pieceProvider.getPiece(origin.betweenDiagonal(target)) == null) {
-				return Error.EATING_EMPTY;
-			}
-		}
 		return null;
 	}
 
