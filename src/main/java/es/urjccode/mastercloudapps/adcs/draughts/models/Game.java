@@ -44,7 +44,7 @@ public class Game {
 		this.board.move(origin, target);
 		if (this.board.getPiece(target).isLimit(target)){
 			this.board.remove(target);
-			this.board.put(target, new Draught(Color.WHITE));
+			this.board.put(target, new Draught(this.getColor(origin)));
 		}
 		this.turn.change();
 	}
