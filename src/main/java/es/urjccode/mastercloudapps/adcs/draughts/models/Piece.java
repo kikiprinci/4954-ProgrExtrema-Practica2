@@ -4,6 +4,8 @@ public class Piece {
 
 	private Color color;
 	private static final int MAX_DISTANCE = 2;
+	private static final int WHITE_LIMIT = 0;
+	private static final int BLACK_LIMIT = 7;
 
 	Piece(Color color) {
 		assert color != null;
@@ -33,8 +35,8 @@ public class Piece {
 	}
 
 	boolean isLimit(Coordinate coordinate){
-		return coordinate.getRow()== 0 && this.getColor() == Color.WHITE ||
-		coordinate.getRow()== 7 && this.getColor() == Color.BLACK;
+		return coordinate.getRow()== Piece.WHITE_LIMIT && this.getColor() == Color.WHITE ||
+		coordinate.getRow()== Piece.BLACK_LIMIT && this.getColor() == Color.BLACK;
 	}
 
 	boolean isAdvanced(Coordinate origin, Coordinate target) {
