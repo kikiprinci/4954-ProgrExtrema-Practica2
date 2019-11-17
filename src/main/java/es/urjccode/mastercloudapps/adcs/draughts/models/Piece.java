@@ -3,7 +3,6 @@ package es.urjccode.mastercloudapps.adcs.draughts.models;
 public class Piece {
 
 	private Color color;
-	private static final int MAX_DISTANCE = 2;
 	private static final int WHITE_LIMIT = 0;
 	private static final int BLACK_LIMIT = 7;
 

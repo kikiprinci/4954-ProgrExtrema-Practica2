@@ -16,7 +16,24 @@ import org.mockito.MockitoAnnotations;
 
 public class GameWithDraughtsTest {
 
+    @Mock
+    Turn turn;
+
+    @Mock
+    Piece piece;
+    
+    @Mock
+    Board board;
+
+    @InjectMocks
+    Game game;
+
     Game gameBuilder;
+
+    @Before
+    public void before(){
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testGivenGameWhenWhitePawnAtLimitThenNewDraugtsWithBuilder(){
