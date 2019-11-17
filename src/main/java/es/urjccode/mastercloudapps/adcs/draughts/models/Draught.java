@@ -2,7 +2,7 @@ package es.urjccode.mastercloudapps.adcs.draughts.models;
 
 class Draught extends Piece {
 
-    private static final int MAX_DISTANCE = 2;
+    private static final int MAX_DISTANCE = 7;
     Draught(Color color) {
         super(color);
     }
