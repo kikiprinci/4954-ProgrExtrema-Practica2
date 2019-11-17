@@ -3,6 +3,7 @@ package es.urjccode.mastercloudapps.adcs.draughts.models;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -12,6 +13,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.internal.matchers.InstanceOf;
 
 public class GameWithDraughtsTest {
 
@@ -117,23 +119,6 @@ public class GameWithDraughtsTest {
     }
 
     @Test
-    public void testGivenGameWhenBlackPawnAtLimitThenNewDraugts(){
-        Coordinate origin = new Coordinate(6,3);
-        Coordinate target = new Coordinate(7,2);
-        when(turn.getColor()).thenReturn(Color.BLACK);
-        when(board.isEmpty(origin)).thenReturn(false);
-        when(board.getColor(origin)).thenReturn(Color.BLACK);
-        when(board.getPiece(origin)).thenReturn(piece);
-        when(piece.isCorrect(origin, target, board)).thenReturn(null);
-        when(board.remove(origin)).thenReturn(new Piece(Color.BLACK));
-        when(board.getPiece(target)).thenReturn(new Piece(Color.BLACK));
-        game.move(new Coordinate(3, 0), new Coordinate(2, 1));
-        game.move(origin, target);
-        verify(board).remove(target);
-        verify(board).put(any(Coordinate.class), any(Draught.class));
-    }
-
-    @Test
     public void testGivenGameWhenBlackPawnAtLimitThenNewDraugtsWithBuilder(){
         Coordinate origin = new Coordinate(6,3);
         Coordinate target = new Coordinate(7,2);
@@ -154,5 +139,40 @@ public class GameWithDraughtsTest {
         assertNotNull(this.gameBuilder.getPiece(target));
         assertEquals(Color.BLACK, this.gameBuilder.getColor(target));
         assertEquals(this.gameBuilder.getPiece(target).getClass(), Draught.class);
+    }
+
+    
+    @Test
+    public void testGivenGameWhenWhiteDraughtMoveThenError() {
+        Coordinate origin = new Coordinate(0, 7);
+        Coordinate target = new Coordinate(0, 6);
+        this.gameBuilder = new GameBuilder()
+            .row("       B")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .build();
+        assertEquals(Error.OPPOSITE_PIECE, this.game.isCorrect(origin, target));
+    }
+
+    @Test
+    public void testGivenGameWhenBlackDraughtMoveThenError() {
+        Coordinate origin = new Coordinate(7, 0);
+        Coordinate target = new Coordinate(7, 1);
+        this.gameBuilder = new GameBuilder()
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("N        ")
+            .build();
+        assertEquals(Error.OPPOSITE_PIECE, this.game.isCorrect(origin, target));
     }
 }

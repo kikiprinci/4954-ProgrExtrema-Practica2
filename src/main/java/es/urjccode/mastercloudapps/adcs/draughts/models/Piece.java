@@ -19,9 +19,6 @@ public class Piece {
 		if (!pieceProvider.isEmpty(target)) {
 			return Error.NOT_EMPTY_TARGET;
 		}
-		if (!this.isAdvanced(origin, target)) {
-			return Error.NOT_ADVANCED;
-		}
 		return null;
 	}
 

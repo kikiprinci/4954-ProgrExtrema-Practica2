@@ -20,22 +20,22 @@ class GameBuilder {
 
     Game build() {
         Board board = new Board();
-        Map<Character, Object> typeOfPieces = new HashMap<Character, Object>();
-        typeOfPieces.put('b', new Piece(Color.WHITE));
-        typeOfPieces.put('n', new Piece(Color.BLACK));
+        Map<Character, Piece> typeOfPieces = new HashMap<Character, Piece>();
+        typeOfPieces.put('b', new Pawn(Color.WHITE));
         typeOfPieces.put('B', new Draught(Color.WHITE));
+        typeOfPieces.put('n', new Pawn(Color.BLACK));
         typeOfPieces.put('N', new Draught(Color.BLACK));
 
         for (int i = 0; i < this.lstRows.size(); i++) {
             for (int j = 0; j < this.lstRows.size(); j++) {
                 char character = this.lstRows.get(i).charAt(j);
                 if (character != ' ') {
-                    Piece piece = (Piece) typeOfPieces.get(character);
-                    Coordinate coordinate = new Coordinate(i, j);
-                    board.put(coordinate,piece);
+                    Piece piece = typeOfPieces.get(character);
+                    board.put(new Coordinate(i, j), piece);
                 }
             }
         }
+        System.out.println(board);
         return new Game(board);
     }
 }
