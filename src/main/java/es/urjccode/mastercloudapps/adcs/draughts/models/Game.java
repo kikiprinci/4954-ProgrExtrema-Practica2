@@ -19,6 +19,11 @@ public class Game {
 		}
 	}
 
+	public Game (Board board) {
+		this.board = board;
+		this.turn = new Turn();
+	}
+
 	private Piece getInitialPiece(Coordinate coordinate) {
 		assert coordinate != null;
 		if (coordinate.isBlack()) {
@@ -38,13 +43,14 @@ public class Game {
 
 	public void move(Coordinate origin, Coordinate target) {
 		assert this.isCorrect(origin, target) == null;
+		Color originalColor = this.getColor(origin);
 		if (origin.diagonalDistance(target) == 2) {
 			this.board.remove(origin.betweenDiagonal(target));
 		}
 		this.board.move(origin, target);
 		if (this.board.getPiece(target).isLimit(target)){
 			this.board.remove(target);
-			this.board.put(target, new Draught(this.getColor(origin)));
+			this.board.put(target, new Draught(originalColor));
 		}
 		this.turn.change();
 	}
