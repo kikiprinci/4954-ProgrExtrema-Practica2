@@ -3,6 +3,8 @@ package es.urjccode.mastercloudapps.adcs.draughts.models;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import org.junit.Test;
 
 public class GameTest {
@@ -155,8 +157,6 @@ public class GameTest {
             .build();
         this.gameBuilder.move(new Coordinate(2, 0), new Coordinate(1, 1));
         this.gameBuilder.move(origin, target);
-        //assertTrue(this.gameBuilder.isBlocked());
-        assertTrue(true);
+        assertTrue(this.gameBuilder.isBlocked());
     }
-
 }

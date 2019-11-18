@@ -77,8 +77,11 @@ public class Game {
 	}
 
 	public boolean isBlocked() {
-		return this.board.getPieces(this.turn.getColor()).isEmpty();
+		//return checkMovementsPiece();
+		return (movementAllow() && !checkMovementsPiece());
 	}
+
+
 
 	public int getDimension() {
 		return this.board.getDimension();
@@ -93,5 +96,32 @@ public class Game {
 	public String toString() {
 		return this.board + "\n" + this.turn;
 	}
+
+	private boolean checkMovementsPiece(){
+		return this.board.getPieces(this.turn.getColor()).isEmpty();
+	}
+
+	private boolean isAllow(Coordinate origin){
+		for (int i = 0; i < this.board.getDimension(); i++) {
+			for (int j = 0; j < this.getDimension(); j++) {
+				if (this.isCorrect(origin,new Coordinate(i,j))==null)
+					return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean movementAllow(){
+		for (int i = 0; i < this.board.getDimension(); i++) {
+			for (int j = 0; j < this.getDimension(); j++) {
+				if (this.getPiece(new Coordinate(i, j)) != null) {
+					return this.isAllow(new Coordinate(i, j));
+				}
+			}
+		}
+        return false;
+	}
+
+	
 
 }
