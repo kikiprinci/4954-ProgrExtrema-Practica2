@@ -8,6 +8,10 @@ public class Game {
 	public Game() {
 		this.turn = new Turn();
 		this.board = new Board();
+		InitBoard();
+	}
+
+	private void InitBoard() {
 		for (int i = 0; i < this.board.getDimension(); i++) {
 			for (int j = 0; j < this.board.getDimension(); j++) {
 				Coordinate coordinate = new Coordinate(i, j);
@@ -19,7 +23,7 @@ public class Game {
 		}
 	}
 
-	public Game (Board board) {
+	public Game(Board board) {
 		this.board = board;
 		this.turn = new Turn();
 	}
@@ -48,14 +52,14 @@ public class Game {
 			this.board.remove(origin.betweenDiagonal(target));
 		}
 		this.board.move(origin, target);
-		if (this.board.getPiece(target).isLimit(target)){
+		if (this.board.getPiece(target).isLimit(target)) {
 			this.board.remove(target);
 			this.board.put(target, new Draught(originalColor));
 		}
 		this.turn.change();
 	}
 
-	public Error isCorrect(Coordinate origin, Coordinate target){
+	public Error isCorrect(Coordinate origin, Coordinate target) {
 		assert origin != null;
 		assert target != null;
 		if (board.isEmpty(origin)) {
@@ -77,11 +81,8 @@ public class Game {
 	}
 
 	public boolean isBlocked() {
-		//return checkMovementsPiece();
 		return (movementAllow() && !checkMovementsPiece());
 	}
-
-
 
 	public int getDimension() {
 		return this.board.getDimension();
@@ -97,21 +98,21 @@ public class Game {
 		return this.board + "\n" + this.turn;
 	}
 
-	private boolean checkMovementsPiece(){
+	private boolean checkMovementsPiece() {
 		return this.board.getPieces(this.turn.getColor()).isEmpty();
 	}
 
-	private boolean isAllow(Coordinate origin){
+	private boolean isAllow(Coordinate origin) {
 		for (int i = 0; i < this.board.getDimension(); i++) {
 			for (int j = 0; j < this.getDimension(); j++) {
-				if (this.isCorrect(origin,new Coordinate(i,j))==null)
+				if (this.isCorrect(origin, new Coordinate(i, j)) == null)
 					return true;
 			}
 		}
 		return false;
 	}
 
-	private boolean movementAllow(){
+	private boolean movementAllow() {
 		for (int i = 0; i < this.board.getDimension(); i++) {
 			for (int j = 0; j < this.getDimension(); j++) {
 				if (this.getPiece(new Coordinate(i, j)) != null) {
@@ -119,9 +120,7 @@ public class Game {
 				}
 			}
 		}
-        return false;
+		return false;
 	}
-
-	
 
 }

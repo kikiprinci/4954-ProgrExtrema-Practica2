@@ -96,5 +96,4 @@ class Board implements PieceProvider {
         }
         return string + row + "\n";
     }
-
 }
