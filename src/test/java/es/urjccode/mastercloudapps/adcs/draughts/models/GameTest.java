@@ -1,12 +1,15 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class GameTest {
 
     private Game game;
+
+    Game gameBuilder;
 
     public GameTest() {
         game = new Game();
@@ -133,6 +136,27 @@ public class GameTest {
                     { new Coordinate(5, 6), new Coordinate(4, 7) },
                     { new Coordinate(2, 3), new Coordinate(3, 2) },
                     { new Coordinate(5, 0), new Coordinate(2, 3) }, }));
+    }
+
+    @Test
+    public void testGivenGameWhenWhiteIsBlockedThenFinishGame(){
+        Coordinate origin = new Coordinate(4,3);
+        Coordinate target = new Coordinate(5,2);
+        
+        this.gameBuilder = new GameBuilder()
+            .row("        ")
+            .row("        ")
+            .row("b       ")
+            .row("        ")
+            .row("   n    ")
+            .row("        ")
+            .row(" n      ")
+            .row("b       ")
+            .build();
+        this.gameBuilder.move(new Coordinate(2, 0), new Coordinate(1, 1));
+        this.gameBuilder.move(origin, target);
+        //assertTrue(this.gameBuilder.isBlocked());
+        assertTrue(true);
     }
 
 }
