@@ -11,6 +11,11 @@ public class Game {
 		InitBoard();
 	}
 
+
+	public Game(Board board) {
+		this.board = board;
+		this.turn = new Turn();
+	}
 	private void InitBoard() {
 		for (int i = 0; i < this.board.getDimension(); i++) {
 			for (int j = 0; j < this.board.getDimension(); j++) {
@@ -21,11 +26,6 @@ public class Game {
 				}
 			}
 		}
-	}
-
-	public Game(Board board) {
-		this.board = board;
-		this.turn = new Turn();
 	}
 
 	private Pawn getInitialPiece(Coordinate coordinate) {
